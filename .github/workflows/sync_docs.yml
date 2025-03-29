@@ -25,6 +25,7 @@ jobs:
           declare -A FILE_MAP=(
             ["docs/developer/sdks/python.mdx"]="sdks/python/README.md"
             ["docs/developer/sdks/swift.mdx"]="sdks/swift/README.md"
+            ["docs/assembly/Build_the_device.mdx"]="assembly/README.md"
           )
 
           for MDX_FILE in "${!FILE_MAP[@]}"; do
@@ -38,7 +39,11 @@ jobs:
 
               awk 'BEGIN{printing=0} /^---$/ {printing=!printing; next} printing==0 {print}' "$MDX_FILE" | tail -n +2 > temp.md
 
-             sed -i 's|](/images/|](../../docs/images/|g' temp.md
+             if [[ "$README_FILE" == assembly/* ]]; then
+                 sed -i 's|](/images/|](../docs/images/|g' temp.md
+               else
+                 sed -i 's|](/images/|](../../docs/images/|g' temp.md
+               fi
               
               echo "<!-- This file is auto-generated from $MDX_FILE. Do not edit manually. -->" | cat - temp.md > "$README_FILE"
               rm temp.md
@@ -66,7 +71,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
 
-          git add sdks/*/README.md
+          git add sdks/*/README.md assembly/README.md
           
           if git diff --staged --quiet; then
             echo "No changes to commit."
