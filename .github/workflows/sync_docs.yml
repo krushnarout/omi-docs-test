@@ -38,6 +38,8 @@ jobs:
 
               awk 'BEGIN{printing=0} /^---$/ {printing=!printing; next} printing==0 {print}' "$MDX_FILE" | tail -n +2 > temp.md
 
+             sed -i 's|](/images/|](../../docs/images/|g' temp.md
+              
               echo "<!-- This file is auto-generated from $MDX_FILE. Do not edit manually. -->" | cat - temp.md > "$README_FILE"
               rm temp.md
               
