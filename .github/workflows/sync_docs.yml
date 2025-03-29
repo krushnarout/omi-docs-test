@@ -24,6 +24,7 @@ jobs:
         run: |
           declare -A FILE_MAP=(
             ["docs/developer/sdks/python.mdx"]="sdks/python/README.md"
+            ["docs/developer/sdks/swift.mdx"]="sdks/swift/README.md"
           )
 
           for MDX_FILE in "${!FILE_MAP[@]}"; do
