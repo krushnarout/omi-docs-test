@@ -3,7 +3,9 @@
 
 An easy to install package to get started with the omi dev kit 1 in seconds.
 
-![components](/images/hero-dark.png)
+![components](../../docs/images/hero-dark.png)
+
+![Test](../../docs/images/hero-dark.png)
 
 ## Installation
 0. Open Xcode => File => New Project => Ios => App => Create project (Interface: storyboard
